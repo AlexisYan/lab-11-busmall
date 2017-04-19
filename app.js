@@ -151,3 +151,4 @@ function renderChart() {
 }
 
 renderPhotoChoise();
+var cat;
