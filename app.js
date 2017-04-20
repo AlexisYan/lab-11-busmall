@@ -12,8 +12,9 @@ function Images (name, filename){
   this.clickCount = 0;
   this.displayCount = 0;
 };
+var imageGroup;
 try{
-  var imageGroup = JSON.parse(localStorage.imageGroup);
+  imageGroup = JSON.parse(localStorage.imageGroup);
 } catch(error){
   var bag =  new Images('Bag','img/bag.jpg');
   var banana =  new Images('Banana Cutter', 'img/banana.jpg');
@@ -36,7 +37,7 @@ try{
   var watering =  new Images ('Watering Can', 'img/water-can.jpg');
   var wine =  new Images ('Wine Glass', 'img/wine-glass.jpg');
 
-  var imageGroup = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, duckDog, dragon, pen, broomDog, scissors, shark, broomBaby, tauntaun, unicorn, usb, watering, wine ];
+  imageGroup = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, duckDog, dragon, pen, broomDog, scissors, shark, broomBaby, tauntaun, unicorn, usb, watering, wine ];
 }
 
 function getRandomIndex (list){
@@ -64,10 +65,11 @@ function handlePhotoClick(event){
   if (clickRemining > 0){
     renderPhotoChoise();
   } else if (clickRemining === 0){
+    imageGroup = imageGroup.concat(photosOnScreen, photosOnPreviousScreen, photosOnSecondToLastScreen);
     renderChart();
     displayChartTwo();
-    getTable();
-    getTableNumber();
+    // getTable();
+    // getTableNumber();
     try {
       localStorage.imageGroup = JSON.stringify(imageGroup);
     } catch (error){
@@ -102,7 +104,26 @@ function renderChart() {
       label: 'Clicks',
       backgroundColor: '#2F343B',
       borderWidth: 1,
-      data: [imageGroup[0].clickCount, imageGroup[1].clickCount, imageGroup[2].clickCount, imageGroup[3].clickCount, imageGroup[4].clickCount, imageGroup[5].clickCount, imageGroup[6].clickCount, imageGroup[7].clickCount, imageGroup[8].clickCount, imageGroup[9].clickCount, imageGroup[10].clickCount, imageGroup[11].clickCount, imageGroup[12].clickCount, imageGroup[13].clickCount, imageGroup[14].clickCount, imageGroup[15].clickCount, imageGroup[16].clickCount, imageGroup[17].clickCount, imageGroup[18].clickCount, imageGroup[19].clickCount]},
+      data: [imageGroup[0].clickCount,
+        imageGroup[1].clickCount,
+        imageGroup[2].clickCount,
+        imageGroup[3].clickCount,
+        imageGroup[4].clickCount,
+        imageGroup[5].clickCount,
+        imageGroup[6].clickCount,
+        imageGroup[7].clickCount,
+        imageGroup[8].clickCount,
+        imageGroup[9].clickCount,
+        imageGroup[10].clickCount,
+        imageGroup[11].clickCount,
+        imageGroup[12].clickCount,
+        imageGroup[13].clickCount,
+        imageGroup[14].clickCount,
+        imageGroup[15].clickCount,
+        imageGroup[16].clickCount,
+        imageGroup[17].clickCount,
+        imageGroup[18].clickCount,
+        imageGroup[19].clickCount]},
     {
       label: 'Displayed',
       backgroundColor: '#703030',
@@ -133,9 +154,9 @@ function displayChartTwo() {
         Math.round((imageGroup[5].clickCount / imageGroup[5].displayCount) * 100),
         Math.round((imageGroup[6].clickCount / imageGroup[6].displayCount) * 100), Math.round((imageGroup[7].clickCount / imageGroup[7].displayCount) * 100), Math.round((imageGroup[8].clickCount / imageGroup[8].displayCount) * 100), Math.round((imageGroup[9].clickCount / imageGroup[9].displayCount) * 100),
         Math.round((imageGroup[10].clickCount / imageGroup[10].displayCount) * 100), Math.round((imageGroup[11].clickCount / imageGroup[11].displayCount) * 100), Math.round((imageGroup[12].clickCount / imageGroup[12].displayCount) * 100), Math.round((imageGroup[13].clickCount / imageGroup[13].displayCount) * 100),
-        Math.round((broomBaby.clickCount / broomBaby.displayCount) * 100),
-        Math.round((tauntaun.clickCount / tauntaun.displayCount) * 100), Math.round((unicorn.clickCount / unicorn.displayCount) * 100), Math.round((usb.clickCount / usb.displayCount) * 100), Math.round((watering.clickCount / watering.displayCount) * 100),
-        Math.round((wine.clickCount / wine.displayCount) * 100) ]},
+        Math.round((imageGroup[14].clickCount / imageGroup[14].displayCount) * 100),
+        Math.round((imageGroup[15].clickCount / imageGroup[15].displayCount) * 100), Math.round((imageGroup[16].clickCount / imageGroup[16].displayCount) * 100), Math.round((imageGroup[17].clickCount / imageGroup[17].displayCount) * 100), Math.round((imageGroup[18].clickCount / imageGroup[18].displayCount) * 100),
+        Math.round((imageGroup[19].clickCount / imageGroup[19].displayCount) * 100) ]},
     ]
   };
   canvas.height = '200';
@@ -148,36 +169,36 @@ function displayChartTwo() {
 
 renderPhotoChoise();
 
-function getTable (){
-  var result = document.getElementById('form');
-  var table = document.createElement('table');
-  table.id = table;
-  var titleRow = document.createElement('tr');
-  var titleItem = document.createElement('th');
-  titleItem.textContent = 'Item';
-  var titleViews = document.createElement('th');
-  titleViews.textContent = 'Views';
-  var titleClicks = document.createElement('th');
-  titleClicks.textContent = 'Clicks';
-  var titlePercetage = document.createElement('th');
-  titlePercetage.textContent = '% of Clicks When Viewed';
-  var titleRecomended = document.createElement('th');
-  titleRecomended.textContent = 'Recomended';
-  table.appendChild(titleItem);
-  table.appendChild(titleViews);
-  table.appendChild(titleClicks);
-  table.appendChild(titlePercetage);
-  table.appendChild(titleRecomended);
-  result.appendChild(table);
-}
+// function getTable (){
+//   var result = document.getElementById('form');
+//   var table = document.createElement('table');
+//   table.id = table;
+//   var titleRow = document.createElement('tr');
+//   var titleItem = document.createElement('th');
+//   titleItem.textContent = 'Item';
+//   var titleViews = document.createElement('th');
+//   titleViews.textContent = 'Views';
+//   var titleClicks = document.createElement('th');
+//   titleClicks.textContent = 'Clicks';
+//   var titlePercetage = document.createElement('th');
+//   titlePercetage.textContent = '% of Clicks When Viewed';
+//   var titleRecomended = document.createElement('th');
+//   titleRecomended.textContent = 'Recomended';
+//   table.appendChild(titleItem);
+//   table.appendChild(titleViews);
+//   table.appendChild(titleClicks);
+//   table.appendChild(titlePercetage);
+//   table.appendChild(titleRecomended);
+//   result.appendChild(table);
+// }
 
-function getTableNumber(){
-  var table = document.getElementById('table');
-  for (var i = 0; i < imageGroup.length; i++){
-    var bodyRow = document.createElement('tr');
-    table.appendChild(bodyRow);
-    var item = document.createElement('td');
-    item.textContent = imageGroup[i].name;
-    item.appendChild(data);
-  }
-}
+// function getTableNumber(){
+//   var table = document.getElementById('table');
+//   for (var i = 0; i < imageGroup.length; i++){
+//     var bodyRow = document.createElement('tr');
+//     table.appendChild(bodyRow);
+//     var item = document.createElement('td');
+//     item.textContent = imageGroup[i].name;
+//     item.appendChild(data);
+//   }
+// }
